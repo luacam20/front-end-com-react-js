@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 import './App.css';
 
-import Header from '../../public/Header';
+import backgroudImage from './assets/background.jpg';
+
+import Header from './components/Header';
 
 function App() {
 const [projects, setProjects] = useState(['Desenvolvimento de app', 'Front-end web']);  
@@ -23,6 +25,8 @@ function handleAddProject() {
   return ( 
     <>
      <Header title="Projects" />
+
+     <img src={backgroudImage}/>
 
      <ul>
        {projects.map(project => <li key={project}>{project}</li>)}

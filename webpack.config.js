@@ -28,6 +28,12 @@ module.exports = {
             { loader: 'style-loader' }, // vai pegar pegar o css que foi interpretado e vai injetar dentro do html
             { loader: 'css-loader' }, // le arq css e interpretar as importações
           ] 
+        },
+        {
+          test: /.*\.(gif|png|jpe?g)$/i,
+          use: {
+            loader: 'file-loader',
+          } 
         }
       ]
     },
