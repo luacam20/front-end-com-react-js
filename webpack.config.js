@@ -17,7 +17,18 @@ module.exports = {
             use: {
                 loader: 'babel-loader',
             }
-          }
+          },
+        {
+          // vamos instalar a seguinte dependencia 
+          // npm install style-loader css-loader
+          // depois que instalarmos vamos colocar o exclude e use
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [
+            { loader: 'style-loader' }, // vai pegar pegar o css que foi interpretado e vai injetar dentro do html
+            { loader: 'css-loader' }, // le arq css e interpretar as importações
+          ] 
+        }
       ]
     },
 };

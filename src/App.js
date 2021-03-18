@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import Header from './components/Header';
+import './App.css';
+
+import Header from '../../public/Header';
 
 function App() {
 const [projects, setProjects] = useState(['Desenvolvimento de app', 'Front-end web']);  
