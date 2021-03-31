@@ -1,35 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from './services/api';
 
 import './App.css';
-
-import backgroudImage from './assets/background.jpg';
 
 import Header from './components/Header';
 
 function App() {
-const [projects, setProjects] = useState(['Desenvolvimento de app', 'Front-end web']);  
+const [projects, setProjects] = useState([]);  
 
-// useState retorna um array com 2 posições
-// 1. Variável com seu valor inicial
-//2. Função para atualizarmos esse valor
+// Vamos buscar nossos dados da api 
+// then = quando isso me retornar uma resposta, eu vou ter disponivel no meu response 
+// damos um console log nele para ver qual o formato dessa resposta 
+useEffect(() => {
+  api.get('/projects').then(response => {
+    setProjects(response.data);
+  })
+}, []);
 
-function handleAddProject() {
-  //projects.push(`Novo projeto ${Date.now()}`);
+async function handleAddProject() {
+ //setProjects([...projects, `Novo projeto ${Date.now()}`]);
 
-// ...(copiando tudo que ja tem dentro de projects)
-// e adicionamos o novo projeto no final (Imutabilidade)
-  setProjects([...projects, `Novo projeto ${Date.now()}`]);
+ const response = await api.post('projects', {
+  title: `Novo projeto ${Date.now()}`,
+  owner: "Diego Fernandes"
+ });
+
+ const project = response.data;
+
+ setProjects([ ...projects, project]);
 
 }
   
   return ( 
     <>
      <Header title="Projects" />
-
-     <img src={backgroudImage}/>
-
      <ul>
-       {projects.map(project => <li key={project}>{project}</li>)}
+       {projects.map(project => <li key={project.id}>{project.title}</li>)}
      </ul>
 
      <button type="button" onClick={handleAddProject}>Adicionar projeto</button>
